@@ -99,24 +99,26 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900">
       {/* ヘッダー */}
-      <header className="py-12 px-6">
+      <header className="py-8 sm:py-12 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-5xl font-bold text-white mb-4 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 text-center">
             Lumique
           </h1>
-          <p className="text-xl text-gray-300 text-center">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 text-center">
             企画案管理プラットフォーム
           </p>
         </div>
       </header>
 
       {/* プロジェクト一覧 */}
-      <main className="max-w-7xl mx-auto px-6 pb-20">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-white mb-2">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
+        <div className="mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
             プロジェクト一覧
           </h2>
-          <p className="text-gray-400">登録されている企画案を閲覧できます</p>
+          <p className="text-sm sm:text-base text-gray-400">
+            登録されている企画案を閲覧できます
+          </p>
         </div>
 
         {projects.length === 0 ? (
@@ -135,7 +137,7 @@ export default function Home() {
       </main>
 
       {/* フッター */}
-      <footer className="py-8 text-center text-gray-500 text-sm">
+      <footer className="py-6 sm:py-8 text-center text-gray-500 text-xs sm:text-sm">
         <p>© 2025 Lumique. All rights reserved.</p>
       </footer>
     </div>

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import SlideNavigation from './SlideNavigation';
+import { useRouter } from "next/navigation";
+import SlideNavigation from "./SlideNavigation";
 
 type SlideLayoutProps = {
   projectId: string;
@@ -37,23 +37,25 @@ export default function SlideLayout({
   };
 
   const handleBackToList = () => {
-    router.push('/');
+    router.push("/");
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-2 sm:p-4">
       <div className="w-full max-w-7xl">
         {/* プロジェクトタイトル */}
-        <div className="mb-4 text-center">
-          <h1 className="text-2xl font-bold text-white mb-2">{projectTitle}</h1>
-          <p className="text-gray-400 text-sm">
+        <div className="mb-3 sm:mb-4 text-center px-2">
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-1 sm:mb-2 line-clamp-2">
+            {projectTitle}
+          </h1>
+          <p className="text-gray-400 text-xs sm:text-sm">
             ページ {currentPage} / {totalPages}
           </p>
         </div>
 
         {/* スライドコンテンツ */}
         <div className="bg-white rounded-lg shadow-2xl overflow-hidden">
-          <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
+          <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
             {children}
           </div>
         </div>
