@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>競合比較・差別化ポイント</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 721px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 721px;
+        }
+        .comparison-row:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .highlight-cell {
+            background-color: rgba(216, 189, 254, 0.2);
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide bg-gradient-to-br from-indigo-900 to-purple-900 text-white p-12 flex flex-col" style=" overflow: hidden;">
+<!-- Header -->
+<div class="mb-6">
+<h1 class="text-4xl font-bold mb-3">競合比較・差別化ポイント</h1>
+<div class="w-24 h-1 bg-pink-400 rounded"></div>
+</div>
+<!-- Subtitle -->
+<div class="mb-6">
+<p class="text-xl">既存投票アプリとの機能比較と日本・インディーズ対応の独自性</p>
+</div>
+<!-- Comparison Table -->
+<div class="bg-indigo-800 bg-opacity-50 rounded-lg p-4 flex-grow">
+<table class="w-full border-collapse">
+<thead>
+<tr class="border-b border-indigo-600">
+<th class="py-3 px-4 text-left w-1/4">項目</th>
+<th class="py-3 px-4 text-left w-2/5">既存投票アプリ（IDOL CHAMP等）</th>
+<th class="py-3 px-4 text-left w-2/5">本サービス</th>
+</tr>
+</thead>
+<tbody>
+<tr class="comparison-row border-b border-indigo-700">
+<td class="py-3 px-4 font-medium">
+<div class="flex items-center">
+<i class="fas fa-chart-bar text-pink-400 mr-2"></i>
+                                投票結果
+                            </div>
+</td>
+<td class="py-3 px-4">人気ランキング中心</td>
+<td class="py-3 px-4 highlight-cell">活動決定（衣装・MV・企画）に反映</td>
+</tr>
+<tr class="comparison-row border-b border-indigo-700">
+<td class="py-3 px-4 font-medium">
+<div class="flex items-center">
+<i class="fas fa-credit-card text-pink-400 mr-2"></i>
+                                決済モデル
+                            </div>
+</td>
+<td class="py-3 px-4">広告・アプリ内課金</td>
+<td class="py-3 px-4 highlight-cell">Stripe分配・手数料型</td>
+</tr>
+<tr class="comparison-row border-b border-indigo-700">
+<td class="py-3 px-4 font-medium">
+<div class="flex items-center">
+<i class="fas fa-balance-scale text-pink-400 mr-2"></i>
+                                公平性設計
+                            </div>
+</td>
+<td class="py-3 px-4">投票数＝金額</td>
+<td class="py-3 px-4 highlight-cell">応援スコア制（非線形＋上限）</td>
+</tr>
+<tr class="comparison-row border-b border-indigo-700">
+<td class="py-3 px-4 font-medium">
+<div class="flex items-center">
+<i class="fas fa-gift text-pink-400 mr-2"></i>
+                                リワード
+                            </div>
+</td>
+<td class="py-3 px-4">広告掲載・バナー</td>
+<td class="py-3 px-4 highlight-cell">名前掲載・限定映像・称号・共創体験</td>
+</tr>
+<tr class="comparison-row">
+<td class="py-3 px-4 font-medium">
+<div class="flex items-center">
+<i class="fas fa-users text-pink-400 mr-2"></i>
+                                対象
+                            </div>
+</td>
+<td class="py-3 px-4">K-POP中心</td>
+<td class="py-3 px-4 highlight-cell">日本・インディーズ含む中小事務所対応</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Key Differentiation Points -->
+<div class="mt-6 flex justify-between">
+<div class="bg-indigo-800 bg-opacity-40 rounded-lg p-4 w-5/12">
+<h3 class="text-lg font-bold mb-2 flex items-center">
+<i class="fas fa-star text-yellow-300 mr-2"></i>
+                    独自性と差別化
+                </h3>
+<p class="text-sm">活動決定に直接反映される点が特徴。ファンの支援がアイドルの活動に直接繋がり、より質の高いプロデュースが可能に。</p>
+</div>
+<div class="bg-indigo-800 bg-opacity-40 rounded-lg p-4 w-5/12">
+<h3 class="text-lg font-bold mb-2 flex items-center">
+<i class="fas fa-globe-asia text-green-300 mr-2"></i>
+                    日本・インディーズ対応
+                </h3>
+<p class="text-sm">中小事務所をターゲットに据え、日本アイドル市場の特性に合わせたサービスを提供。K-POPだけではなく多様なアーティストをサポート。</p>
+</div>
+</div>
+<!-- Footer -->
+<div class="mt-4 text-right text-sm opacity-70">
+<p>ファン参加型アイドルプロデュースプラットフォーム</p>
+</div>
+</div>
+
+</body></html>

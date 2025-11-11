@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>収益モデル</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+        }
+        .revenue-card {
+            transition: all 0.3s ease;
+        }
+        .revenue-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .bar-label {
+            font-size: 14px;
+            fill: white;
+            text-anchor: middle;
+        }
+        .axis-label {
+            font-size: 12px;
+            fill: #e2e8f0;
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide bg-gradient-to-br from-indigo-900 to-purple-900 text-white p-12 flex flex-col" style=" overflow: hidden;">
+<!-- Header -->
+<div class="mb-6">
+<h1 class="text-4xl font-bold mb-3">収益モデル</h1>
+<div class="w-24 h-1 bg-pink-400 rounded"></div>
+</div>
+<!-- Subtitle -->
+<div class="mb-6">
+<p class="text-xl">支援額に応じた手数料率設定と個人開発可能なスケーラBLEな低固定費構造</p>
+</div>
+<!-- Revenue Model Chart -->
+<div class="flex-grow flex">
+<div class="w-3/5" id="chart-container">
+<svg height="380" id="revenue-chart" width="700"></svg>
+</div>
+<div class="w-2/5 pl-8 flex flex-col justify-center">
+<!-- Key Points -->
+<div class="revenue-card bg-indigo-800 bg-opacity-70 rounded-lg p-5 mb-4">
+<div class="flex items-center mb-2">
+<i class="fas fa-percentage text-pink-400 text-2xl mr-3"></i>
+<h3 class="font-bold text-lg">段階的な手数料率</h3>
+</div>
+<p class="text-sm">支援額に応じて手数料率を調整。大規模案件でも12%まで。</p>
+</div>
+<div class="revenue-card bg-indigo-800 bg-opacity-70 rounded-lg p-5 mb-4">
+<div class="flex items-center mb-2">
+<i class="fas fa-coins text-pink-400 text-2xl mr-3"></i>
+<h3 class="font-bold text-lg">個人開発可能</h3>
+</div>
+<p class="text-sm">個人開発でも運営可能。年間コスト50万円以下。</p>
+</div>
+<div class="revenue-card bg-indigo-800 bg-opacity-70 rounded-lg p-5">
+<div class="flex items-center mb-2">
+<i class="fas fa-chart-line text-pink-400 text-2xl mr-3"></i>
+<h3 class="font-bold text-lg">スケーラBLEな低固定費</h3>
+</div>
+<p class="text-sm">利用するだけの基本モデルで中小事務所にも適する。</p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="mt-6 text-right text-sm opacity-70">
+<p>ファン参加型アイドルプロデュースプラットフォーム</p>
+</div>
+</div>
+<script>
+        // Data from the document
+        const revenueData = [
+            { support: 1, rate: 10, revenue: 10 },
+            { support: 3, rate: 10, revenue: 30 },
+            { support: 5, rate: 12, revenue: 60 }
+        ];
+        
+        // Set up SVG
+        const svg = d3.select("#revenue-chart");
+        const width = 700;
+        const height = 380;
+        const margin = { top: 40, right: 30, bottom: 60, left: 60 };
+        const innerWidth = width - margin.left - margin.right;
+        const innerHeight = height - margin.top - margin.bottom;
+        
+        // Create scales
+        const xScale = d3.scaleBand()
+            .domain(revenueData.map(d => d.support + "億"))
+            .range([0, innerWidth])
+            .padding(0.3);
+            
+        const yScale = d3.scaleLinear()
+            .domain([0, d3.max(revenueData, d => d.revenue) * 1.2])
+            .range([innerHeight, 0]);
+            
+        const barWidth = xScale.bandwidth() / 2;
+        
+        // Create group for the chart
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+            
+        // Add axes
+        g.append("g")
+            .attr("transform", `translate(0, ${innerHeight})`)
+            .call(d3.axisBottom(xScale))
+            .selectAll("text")
+            .attr("class", "axis-label");
+            
+        g.append("g")
+            .call(d3.axisLeft(yScale))
+            .selectAll("text")
+            .attr("class", "axis-label");
+            
+        // Add bars for revenue
+        g.selectAll(".revenue-bar")
+            .data(revenueData)
+            .enter()
+            .append("rect")
+            .attr("class", "revenue-bar")
+            .attr("x", d => xScale(d.support + "億"))
+            .attr("y", d => yScale(d.revenue))
+            .attr("width", barWidth)
+            .attr("height", d => innerHeight - yScale(d.revenue))
+            .attr("fill", "#ec4899")
+            .attr("rx", 4);
+            
+        // Add bars for support amount
+        g.selectAll(".support-bar")
+            .data(revenueData)
+            .enter()
+            .append("rect")
+            .attr("class", "support-bar")
+            .attr("x", d => xScale(d.support + "億") + barWidth)
+            .attr("y", d => yScale(d.support))
+            .attr("width", barWidth)
+            .attr("height", d => innerHeight - yScale(d.support))
+            .attr("fill", "#8b5cf6")
+            .attr("rx", 4);
+            
+        // Add labels for revenue bars
+        g.selectAll(".revenue-label")
+            .data(revenueData)
+            .enter()
+            .append("text")
+            .attr("class", "bar-label")
+            .attr("x", d => xScale(d.support + "億") + barWidth/2)
+            .attr("y", d => yScale(d.revenue) - 10)
+            .text(d => d.revenue + "百万");
+            
+        // Add labels for support bars
+        g.selectAll(".support-label")
+            .data(revenueData)
+            .enter()
+            .append("text")
+            .attr("class", "bar-label")
+            .attr("x", d => xScale(d.support + "億") + barWidth + barWidth/2)
+            .attr("y", d => yScale(d.support) - 10)
+            .text(d => d.support + "億");
+            
+        // Add legend
+        const legend = svg.append("g")
+            .attr("transform", `translate(${width - 180}, 15)`);
+            
+        legend.append("rect")
+            .attr("width", 15)
+            .attr("height", 15)
+            .attr("fill", "#ec4899")
+            .attr("rx", 2);
+            
+        legend.append("text")
+            .attr("x", 25)
+            .attr("y", 12)
+            .attr("class", "axis-label")
+            .text("年間収益");
+            
+        legend.append("rect")
+            .attr("width", 15)
+            .attr("height", 15)
+            .attr("fill", "#8b5cf6")
+            .attr("rx", 2)
+            .attr("transform", "translate(0, 25)");
+            
+        legend.append("text")
+            .attr("x", 25)
+            .attr("y", 37)
+            .attr("class", "axis-label")
+            .text("支援額");
+            
+        // Add title
+        g.append("text")
+            .attr("class", "axis-label")
+            .attr("text-anchor", "middle")
+            .attr("x", innerWidth/2)
+            .attr("y", -15)
+            .text("支援額・手数料率・年間収益");
+            
+        // Add y-axis label
+        g.append("text")
+            .attr("class", "axis-label")
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -innerHeight/2)
+            .attr("y", -40)
+            .text("金額（百万円）");
+    </script>
+
+</body></html>

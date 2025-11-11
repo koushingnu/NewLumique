@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+/* Custom animations */
+@keyframes twinkle {
+  0% {opacity: 0.3;}
+  100% {opacity: 1;}
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 3s infinite alternate;
+}
+
+.circle-decoration {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.2;
+}
+
+.bg-gradient {
+  background: linear-gradient(135deg, #ff99cc 0%, #ff66cc 25%, #cc3399 50%, #9933cc 75%, #6633cc 100%);
+}
+
