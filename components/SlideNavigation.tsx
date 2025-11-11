@@ -83,20 +83,56 @@ export default function SlideNavigation({
         </button>
 
         {/* ページ番号 */}
-        <div className="flex gap-1 sm:gap-2 overflow-x-auto max-w-[200px] sm:max-w-none">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <button
-              key={page}
-              onClick={() => onGoToPage(page)}
-              className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg font-medium transition-colors text-sm sm:text-base flex-shrink-0 ${
-                page === currentPage
-                  ? "bg-pink-500 text-white"
-                  : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-              }`}
-            >
-              {page}
-            </button>
-          ))}
+        <div className="flex gap-1 sm:gap-2 items-center">
+          {/* 最初のページ */}
+          {currentPage > 3 && (
+            <>
+              <button
+                onClick={() => onGoToPage(1)}
+                className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg font-medium transition-colors text-sm sm:text-base bg-gray-700 text-gray-300 hover:bg-gray-600"
+              >
+                1
+              </button>
+              {currentPage > 4 && (
+                <span className="text-gray-500 px-1">...</span>
+              )}
+            </>
+          )}
+
+          {/* 現在のページ周辺 */}
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .filter((page) => {
+              const distance = Math.abs(page - currentPage);
+              return distance <= 2;
+            })
+            .map((page) => (
+              <button
+                key={page}
+                onClick={() => onGoToPage(page)}
+                className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg font-medium transition-colors text-sm sm:text-base ${
+                  page === currentPage
+                    ? "bg-pink-500 text-white"
+                    : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+
+          {/* 最後のページ */}
+          {currentPage < totalPages - 2 && (
+            <>
+              {currentPage < totalPages - 3 && (
+                <span className="text-gray-500 px-1">...</span>
+              )}
+              <button
+                onClick={() => onGoToPage(totalPages)}
+                className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg font-medium transition-colors text-sm sm:text-base bg-gray-700 text-gray-300 hover:bg-gray-600"
+              >
+                {totalPages}
+              </button>
+            </>
+          )}
         </div>
 
         <button
